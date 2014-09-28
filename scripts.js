@@ -465,16 +465,16 @@ init : function() {
     rules = [ "",
     "RuleBot: The CaloTown Rules:",
     "",
-    "1. CaloTown is an international server:",
-    "- Respect other peoples' cultures and do not demand they speak English. Everyone is welcome at CaloTown, as long as they follow the rules.",
-    "2. No advertising, excessive messages, inappropriate/obscene links, or text art:",
-    "- Do not post links unless they are to notable sites (Youtube, Smogon, Serebii, etc). We are not interested in your start-up community. Do not monopolize the chat with large amounts of messages, or short ones in rapid succession. Posting ASCII art is punishable with a ban, as is posting anything with any type of pornography.",
-    "3. Do not ask for authority:",
-    "- By asking, you may have eliminated your chances of becoming one in the future. If you are genuinely interested in becoming a staff member then a good way to get noticed is to become an active member of the community. Engaging others in intelligent chats and offering to help with graphics, programming, the wiki, or our YouTube channel (among others) is a good way to get noticed.",
-    "4. No trolling, flaming, or harassing other players. Do not complain about hax in the chat, beyond a one line comment:",
-    "- Inciting responses with inflammatory comments, using verbal abuse against other players, or spamming them via chat/PM/challenges will not be tolerated. Harassing other players by constantly aggravating them or revealing personal information will be severely punished. A one line comment regarding hax after a loss to vent is fine, but excessive bemoaning is not acceptable. Excessive vulgarity will not be tolerated. Wasting the time of the authority will also result in punishment.",
-    "5. Do not attempt to circumvent the rules:",
-    "- Ignorance of the rules is not a valid reason for breaking them. Do not attempt to find or create any loopholes in these rules, or try to adapt them in order to have a punishment overturned or to justify your actions. Doing so may incur a further punishment. Make valid appeals directly to the authority of the server."
+    "Rule #1: English Only",
+    "Rule #2: No advertising",
+    "Rule #3: Do not ask for auth/staff",
+    "Rule #4: No spam or abusing CAPS",
+    "Rule #5: No Pornography",
+    "Rule #6: No flaming",
+    "Rule #7: No excessive cussing/cursing",
+    "Rule #8: Do not insult auth or anyone at that matter, be respectful",
+    "Rule #9: No Roleplay in the main channel, go to the RPG Channel",
+    "Rule #10: Do not attempt to find loopholes in the rules OR ban evade",
     ];
 
     if (typeof script.authStats == 'undefined')
@@ -1331,7 +1331,7 @@ afterLogIn : function(src) {
         sys.saveVal("MaxPlayersOnline", maxPlayersOnline);
     }
 
-    countbot.sendMessage(src, "Number of players online is " + sys.numPlayers() + ". Max number of players online was " + sys.getVal("MaxPlayersOnline") + ".");
+    countbot.sendMessage(src, "Number of players online is " + sys.numPlayers() + ". Out of a maximum of " + sys.getVal("MaxPlayersOnline") + ".");
     if (typeof(this.startUpTime()) == "string")
     countbot.sendMessage(src, "CaloTown has been online for "+this.startUpTime());
     sys.sendMessage(src, "");

@@ -3,7 +3,7 @@ function Bot(name) {
 }
 Bot.prototype.formatMsg = function(message)
 {
-    return "±" + this.name + ": " + message;
+    return "+" + this.name + ": " + message;
 }
 /* Shortcuts to sys functions */
 Bot.prototype.sendAll = function(message, channel)

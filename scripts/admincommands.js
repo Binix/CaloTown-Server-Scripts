@@ -38,7 +38,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         normalbot.sendAll("" + count + " unwanted visitors were kicked...", staffchannel);
         return;
     }
-    if (command == "destroychan") {
+    if (command == "chanoff") {
         var ch = commandData;
         var chid = sys.channelId(ch);
         if(sys.existChannel(ch) !== true) {
@@ -294,7 +294,7 @@ exports.help =
         "/channelnameunban: Removes a regexp ban on channel names.",
         "/namewarn: Adds a regexp namewarning",
         "/nameunwarn: Removes a regexp namewarning",
-        "/destroychan: Destroy a channel (official channels are protected).",
+        "/chanoff: Destroy a channel (official channels are protected).",
         "/indigoinvite: To invite somebody to staff channels.",
         "/indigodeinvite: To deinvite unwanted visitors from staff channel.",
         "/cookieban: Bans an online target by cookie.",

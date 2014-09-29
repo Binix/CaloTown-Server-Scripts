@@ -11,7 +11,7 @@ var tourwinners, leaderboard, eventleaderboard, tourschan, tourserrchan, toursee
 
 
 function statInit() {
-    tourschan = sys.channelId("Tournaments");
+    tourschan = sys.channelId("Main");
     tourserrchan = sys.channelId("Developer's Den");
     try {
         var winners = sys.getFileContent(dataDir+"winners.txt").split("\n");

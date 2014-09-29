@@ -211,7 +211,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
             case "admins":
             case "administrators":
                 sys.sendMessage(src, "*** Administrators ***", channel);
-                authlist.filter(filterByAuth(2)).forEach(printOnlineOffline);
+                 If (auth == 2) {sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\aAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
                 break;
             case "mods":
             case "moderators":

@@ -15,7 +15,7 @@ This code will only work on servers updated to 6th Gen!
 var tourschan, tourserrchan, tours, tourwinmessages, tourstats, tourwarnings;
 
 if (typeof tourschan !== "string") {
-    tourschan = sys.channelId("Tournaments");
+    tourschan = sys.channelId("Main");
 }
 
 if (typeof tourserrchan !== "string") {

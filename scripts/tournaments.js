@@ -76,7 +76,7 @@ function tierClauses(tier) {
         return null;
 }
 
-function Tournament(channel)
+function Main(channel)
 {
 
     /* reuse variables from SESSION memory if possible */

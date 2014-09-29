@@ -206,7 +206,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         switch (commandData) {
             case "owners":
                 sys.sendMessage(src, "*** Owners ***", channel);
-                authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
+                <img src='Themes\Classic\client\aAvailable.png'>authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
                 break;
             case "admins":
             case "administrators":

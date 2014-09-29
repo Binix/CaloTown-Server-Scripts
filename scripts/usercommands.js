@@ -198,15 +198,22 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
             if (sys.id(name) === undefined) {
                 if (DoNotShowIfOffline.indexOf(name) == -1) sys.sendMessage(src, name, channel);
             } else {
-                sys.sendHtmlMessage(src, "<timestamp/><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
-            }
+                if (auth == 3) {
+                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\oAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
+                }
+                if (auth == 2) {
+                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\aAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);    
+                }
+                if (auth == 1) {
+                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\mAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
+                }
         };
         var authlist = sys.dbAuths().sort();
         sys.sendMessage(src, "", channel);
         switch (commandData) {
             case "owners":
                 sys.sendMessage(src, "*** Owners ***", channel);
-                <img src='Themes\Classic\client\aAvailable.png'>authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
+                authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
                 break;
             case "admins":
             case "administrators":

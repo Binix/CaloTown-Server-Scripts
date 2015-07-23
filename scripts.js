@@ -6,7 +6,7 @@
 var Config = {
     base_url: "https://raw.githubusercontent.com/Kase0786/CaloTown-Server-Scripts/master/",
     dataDir: "scriptdata/",
-    bot: "ArkScar",
+    bot: "GengarBot",
     kickbot: "Kick",
     capsbot: "CAPS",
     channelbot: "Channel",

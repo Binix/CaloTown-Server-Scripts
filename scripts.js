@@ -1320,7 +1320,7 @@ afterLogIn : function(src) {
     if (script.cookieBanned(src)) { //prevents errors from "no id" from the rest of the function
         return;
     }
-    sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.icyboards.net/index.php");
+    sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us");
     commandbot.sendMessage(src, "Type in /commands to view the command lists. Type in /auth to view the staff members. Type in /rules to view the rules, you must follow them, so they should be known!");
 
     if (sys.numPlayers() > maxPlayersOnline) {

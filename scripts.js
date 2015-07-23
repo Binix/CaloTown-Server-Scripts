@@ -473,8 +473,8 @@ init : function() {
     "Rule #6: No flaming",
     "Rule #7: No excessive cussing/cursing",
     "Rule #8: Do not insult auth or anyone at that matter, be respectful",
-    "Rule #9: No Roleplay in the main channel, go to the RPG Channel",
-    "Rule #10: Do not attempt to find loopholes in the rules OR ban evade",
+    "Rule #9: Do not attempt to find loopholes in the rules OR ban evade",
+    "Rule #10: Have fun!",
     ];
 
     if (typeof script.authStats == 'undefined')

@@ -191,53 +191,52 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         }
         return;
     }
-    if (command == "auth") {
-        var DoNotShowIfOffline = ["loseyourself", "oneballjay"];
-        var filterByAuth = function(level) { return function(name) { return sys.dbAuth(name) == level; }; };
-        var printOnlineOffline = function(name) {
-            if (sys.id(name) === undefined) {
-                if (DoNotShowIfOffline.indexOf(name) == -1) sys.sendMessage(src, name, channel);
-            } else {
-                if (auth == 3) {
-                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\oAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
-                }
-                if (auth == 2) {
-                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\aAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);    
-                }
-                if (auth == 1) {
-                sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\mAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
-                }
+    if (command == "authlist") {
+    var DoNotShowIfOffline = ["loseyourself", "oneballjay"];
+    var filterByAuth = function(level) {
+        return function(name) {
+            return sys.dbAuth(name) == level;
         };
-        var authlist = sys.dbAuths().sort();
-        sys.sendMessage(src, "", channel);
-        switch (commandData) {
-            case "owners":
-                sys.sendMessage(src, "*** Owners ***", channel);
-                authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
-                break;
-            case "admins":
-            case "administrators":
-                sys.sendMessage(src, "*** Administrators ***", channel);
-                 If (auth == 2) {sys.sendHtmlMessage(src, "<timestamp/><img src='Themes\Classic\client\aAvailable.png'><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font>", channel);
-                break;
-            case "mods":
-            case "moderators":
-                sys.sendMessage(src, "*** Moderators ***", channel);
-                authlist.filter(filterByAuth(1)).forEach(printOnlineOffline);
-                break;
-            default:
-                sys.sendMessage(src, "*** Owners ***", channel);
-                authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
-                sys.sendMessage(src, '', channel);
-                sys.sendMessage(src, "*** Administrators ***", channel);
-                authlist.filter(filterByAuth(2)).forEach(printOnlineOffline);
-                sys.sendMessage(src, '', channel);
-                sys.sendMessage(src, "*** Moderators ***", channel);
-                authlist.filter(filterByAuth(1)).forEach(printOnlineOffline);
+    };
+    var authToIcon = ["u", "m", "a", "o"];
+    var printOnlineOffline = function(name) {
+        if (sys.id(name) === undefined) {
+            if (DoNotShowIfOffline.indexOf(name) == -1) sys.sendHtmlMessage(src, "<timestamp/><img src=\"Themes\\Classic\\client\\" + authToIcon[sys.dbAuth(name)] + "Away.png\">" + name + "(offline)", channel);
         }
-        sys.sendMessage(src, '', channel);
-        return;
+        else {
+            sys.sendHtmlMessage(src, "<timestamp/><img src=\"Themes\\Classic\\client\\" + authToIcon[sys.dbAuth(name)] + "Available.png\"><font color = " + sys.getColor(sys.id(name)) + "><b>" + name.toCorrectCase() + "</b></font> (online)", channel);
+        }
+    };
+    var authlist = sys.dbAuths().sort();
+    sys.sendMessage(src, "", channel);
+    switch (commandData) {
+        case "owners":
+            sys.sendMessage(src, "*** Owners ***", channel);
+            authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
+            break;
+        case "admins":
+        case "administrators":
+            sys.sendMessage(src, "*** Administrators ***", channel);
+            authlist.filter(filterByAuth(2)).forEach(printOnlineOffline);
+            break;
+        case "mods":
+        case "moderators":
+            sys.sendMessage(src, "*** Moderators ***", channel);
+            authlist.filter(filterByAuth(1)).forEach(printOnlineOffline);
+            break;
+        default:
+            sys.sendMessage(src, "*** Owners ***", channel);
+            authlist.filter(filterByAuth(3)).forEach(printOnlineOffline);
+            sys.sendMessage(src, '', channel);
+            sys.sendMessage(src, "*** Administrators ***", channel);
+            authlist.filter(filterByAuth(2)).forEach(printOnlineOffline);
+            sys.sendMessage(src, '', channel);
+            sys.sendMessage(src, "*** Moderators ***", channel);
+            authlist.filter(filterByAuth(1)).forEach(printOnlineOffline);
     }
+    sys.sendMessage(src, '', channel);
+    return;
+}
     if (command == "sametier") {
         if (commandData == "on") {
             battlebot.sendMessage(src, "You enforce same tier in your battles.", channel);

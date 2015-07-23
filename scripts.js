@@ -1321,7 +1321,7 @@ afterLogIn : function(src) {
         return;
     }
     sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us");
-    commandbot.sendMessage(src, "<b>Welcome to <font color=purple><u>CaloTown!</b></font></u>");
+    commandbot.sendMessage(src, "<b>+GengarBot: Welcome to <font color=purple><u>CaloTown!</b></font></u>");
 
     if (sys.numPlayers() > maxPlayersOnline) {
         maxPlayersOnline = sys.numPlayers();

@@ -1322,6 +1322,7 @@ afterLogIn : function(src) {
     }
     sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us");
     commandbot.sendMessage(src, "Remember to read the /rules");
+    sys.sendMessage(src, "<b>+GengarBot: Welcome to <font color=purple><u>CaloTown!</b></font></u>");
 
     if (sys.numPlayers() > maxPlayersOnline) {
         maxPlayersOnline = sys.numPlayers();
@@ -1335,7 +1336,6 @@ afterLogIn : function(src) {
     if (typeof(this.startUpTime()) == "string")
     countbot.sendMessage(src, "CaloTown has been online for "+this.startUpTime());
     sys.sendMessage(src, "");
-    sys.sendMessage(src, "<b>+GengarBot: Welcome to <font color=purple><u>CaloTown!</b></font></u>");
 
     callplugins("afterLogIn", src);
 

@@ -1322,7 +1322,7 @@ afterLogIn : function(src) {
     }
     sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us");
     commandbot.sendMessage(src, "Remember to read the /rules");
-    sys.sendMessage(src, "[b]+GengarBot: Welcome to [font color=purple][u]CaloTown![/b][font][/u]");
+    sys.sendMessage(src, "<b>+GengarBot: Welcome to <font color=purple><u>CaloTown!");
 
     if (sys.numPlayers() > maxPlayersOnline) {
         maxPlayersOnline = sys.numPlayers();

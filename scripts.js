@@ -1,28 +1,28 @@
 // This is the official Pokemon Online Scripts
-//Edited by Kase and Binix for CaloTown 2014  
+// Edited by Kase and Binix for CaloTown 2014  
 // These scripts will only work on 2.0.00 or newer.
 /*jshint "laxbreak":true,"shadow":true,"undef":true,"evil":true,"trailing":true,"proto":true,"withstmt":true*/
 // You may change these variables as long as you keep the same type
 var Config = {
-    base_url: "https://github.com/Binix/CaloTown-Server-Scripts",
+    base_url: "https://raw.githubusercontent.com/Kase0786/CaloTown-Server-Scripts/master/",
     dataDir: "scriptdata/",
     bot: "GengarBot",
-    kickbot: "Kick",
-    capsbot: "CAPS",
-    channelbot: "Channel",
+    kickbot: "VictiniBot",
+    capsbot: "CAPSbot",
+    channelbot: "ChannelBot",
     checkbot: "SnorlaxBot",
     coinbot: "WeavileBot",
-    countbot: "Tracker",
-    tourneybot: "Tournament",
-    rankingbot: "Ladder",
+    countbot: "TrackerBot",
+    tourneybot: "TournamentBot",
+    rankingbot: "LadderBot",
     battlebot: "BlastoiseBot",
-    commandbot: "Command",
-    querybot: "DataBase",
-    hangbot: "HangMan",
-    rpgbot: "Xatu",
+    commandbot: "CommandBot",
+    querybot: "DataBaseBot",
+    hangbot: "HangManBot",
+    rpgbot: "XatuBot",
     bfbot: "GoomyBot",
     // suspectvoting.js available, but not in use
-    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "rpg.js", "casino.js"],
+    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "bot.js"],
     Mafia: {
         bot: "Jason",
         norepeat: 5,
@@ -227,7 +227,7 @@ function updateNotice() {
 function sendNotice() {
     var notice = sys.getFileContent(Config.dataDir + "notice.html");
     if (notice) {
-        ["Tohjo Falls", "Trivia", "Tournaments", "Indigo Plateau", "Victory Road", "TrivReview", "Mafia", "Hangman"].forEach(function(c) {
+        ["Tohjo Falls", "Trivia", "Tournaments"].forEach(function(c) {
             sys.sendHtmlAll(notice, sys.channelId(c));
         });
     }
@@ -342,7 +342,7 @@ step: function() {
         });
         clearTeamFiles();
     }
-    if ([0, 6, 12, 18].indexOf(date.getUTCHours()) != -1 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0) {
+    if (date.getUTCHours() % 3 === 0 && date.getUTCMinutes() === 0 && date.getUTCSeconds() === 0) {
         sendNotice();
     }
     // Reset stats monthly
@@ -465,16 +465,16 @@ init : function() {
     rules = [ "",
     "RuleBot: The CaloTown Rules:",
     "",
-    "Rule #1: English Only",
-    "Rule #2: No advertising",
-    "Rule #3: Do not ask for auth/staff",
-    "Rule #4: No spam or abusing CAPS",
-    "Rule #5: No Pornography",
-    "Rule #6: No flaming",
-    "Rule #7: No excessive cussing/cursing",
-    "Rule #8: Do not insult auth or anyone at that matter, be respectful",
-    "Rule #9: Do not attempt to find loopholes in the rules OR ban evade",
-    "Rule #10: Have fun!",
+    "Rule #1: English Only.",
+    "Rule #2: No advertising.",
+    "Rule #3: Do not ask for auth/staff.",
+    "Rule #4: No spam or abusing CAPS.",
+    "Rule #5: No Pornography.",
+    "Rule #6: No flaming.",
+    "Rule #7: No excessive cussing/cursing.",
+    "Rule #8: Do not insult auth or anyone at that matter, be respectful.",
+    "Rule #9: No excessive name changes, it's annoying, and sometimes an example of trolling.",
+    "Rule #10: Do not attempt to find loopholes in the rules OR ban evade.",
     ];
 
     if (typeof script.authStats == 'undefined')
@@ -1320,9 +1320,8 @@ afterLogIn : function(src) {
     if (script.cookieBanned(src)) { //prevents errors from "no id" from the rest of the function
         return;
     }
-    sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us");
-    commandbot.sendMessage(src, "Remember to read the /rules");
-    sys.sendMessage(src, "<b>+GengarBot: Welcome to <font color=purple><u>CaloTown!</b></font></u>");
+    sys.sendMessage(src, "☯ForumBot: Join the CaloTown forums here: http://calotown.us/");
+    commandbot.sendMessage(src, "Type in /commands to view the command lists!");
 
     if (sys.numPlayers() > maxPlayersOnline) {
         maxPlayersOnline = sys.numPlayers();
@@ -1336,6 +1335,7 @@ afterLogIn : function(src) {
     if (typeof(this.startUpTime()) == "string")
     countbot.sendMessage(src, "CaloTown has been online for "+this.startUpTime());
     sys.sendMessage(src, "");
+    sys.sendHtmlMessage(src, "<b><i>+Message of the Day: Welcome to <font color = #660066>Calotown!</font> We hope you enjoy your stay, oh and remember to read the <u>/rules!</u> Not reading them doesn't exclude you from your punishment.</b></i>");
 
     callplugins("afterLogIn", src);
 
@@ -1526,6 +1526,27 @@ meon: function(src, commandData) {
     }
 },
 
+dieoff: function (src, commandData) {
+    var cid = sys.channelId(commandData);
+    if (cid !== undefined) {
+        SESSION.channels(cid).dieoff = true;
+        normalbot.sendAll("" + sys.name(src) + " turned off /d in " + commandData + ".", cid);
+    } else {
+        normalbot.sendMessage(src, "Unknown channel!", channel);
+    }
+    return;
+},
+
+dieon: function (src, commandData) {
+    var cid = sys.channelId(commandData);
+    if (cid !== undefined) {
+        SESSION.channels(cid).dieoff = false;
+        normalbot.sendAll("" + sys.name(src) + " turned on /d in " + commandData + ".", cid);
+        SESSION.global().channelManager.update(cid);
+    } else {
+        normalbot.sendMessage(src, "Unknown channel!", channel);
+    }
+},
 beforeNewMessage : function(msg) {
     //Disabling for the moment
    if (0 && msg != "Script Check: OK") {
@@ -1738,7 +1759,6 @@ beforeChatMessage: function(src, message, chan) {
         }
         sys.stopEvent();
     };
-
     // Forward some commands to Shanai
     if (['|', '\\'].indexOf(message[0]) > -1 && !usingBannedWords() && name != 'coyotte508') {
         shanaiForward(message);

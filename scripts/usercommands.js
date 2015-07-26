@@ -228,7 +228,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         }
         return;
     }
-    if (command == "auth") {
+    if (command == "authlist") {
         var DoNotShowIfOffline = ["loseyourself", "oneballjay"];
         var filterByAuth = function(level) { return function(name) { return sys.dbAuth(name) == level; }; };
         var printOnlineOffline = function(name) {

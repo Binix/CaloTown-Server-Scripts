@@ -1,4 +1,3 @@
-// Hello
 // This is the official Pokemon Online Scripts
 // Edited by Kase and Binix for CaloTown 2014  
 // These scripts will only work on 2.0.00 or newer.

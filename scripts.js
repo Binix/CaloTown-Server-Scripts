@@ -31,8 +31,8 @@ var Config = {
         notPlayingMsg: "±Game: The game is in progress. Please type /join to join the next mafia game."
     },
     DreamWorldTiers: ["No Preview OU", "No Preview Ubers", "DW LC", "DW UU", "DW LU", "Gen 5 1v1 Ubers", "Gen 5 1v1", "Challenge Cup", "CC 1v1", "DW Uber Triples", "No Preview OU Triples", "No Preview Uber Doubles", "No Preview OU Doubles", "Shanai Cup", "Shanai Cup 1.5", "Shanai Cup STAT", "Original Shanai Cup TEST", "Monocolour", "Clear Skies DW"],
-    superAdmins: ["Binix", "Kase"],
-    canJoinStaffChannel: ["Neos"],
+    superAdmins: ["Binix"],
+    canJoinStaffChannel: ["Espeo"],
     disallowStaffChannel: [],
     topic_delimiter: " | ",
     registeredLimit: 30

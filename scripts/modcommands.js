@@ -136,7 +136,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         script.silenceoff(src, chanName);
         return;
     }
-    if (command == "k") {
+    if (command == "kick") {
         if (tar === undefined) {
             normalbot.sendMessage(src, "No such user", channel);
             return;
@@ -616,7 +616,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
 };
 exports.help = 
     [
-        "/k: Kicks someone.",
+        "/kick: Kicks someone.",
         "/mute: Mutes someone. Format is /mute name:reason:time. Time is optional and defaults to 1 day.",
         "/unmute: Unmutes someone.",
         "/smute: Secretly mutes a user. Can't smute auth. Format is same as mute. Default time is permanent.",

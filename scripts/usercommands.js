@@ -183,7 +183,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         countbot.sendMessage(src, "There are " + sys.numPlayers() + " players online.", channel);
         return;
     }
-    if (command == "ranking") {
+    if (command == "ladder") {
         var announceTier = function(tier) {
             var rank = sys.ranking(sys.name(src), tier);
             if (rank === undefined) {
@@ -1041,7 +1041,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
 exports.help =
     [
         "/rules [x]: Shows the rules (x is optionally parameter to show a specific rule).",
-        "/ranking: Shows your ranking in your current tier, or a specified tier.",
+        "/ladder: Shows your ranking in your current tier, or a specified tier.",
         "/battlecount: Shows the ranking of another user. Format is /battlecount name:tier.",
         "/myalts: Lists your alts.",
         "/me [message]: Sends a message with *** before your name.",

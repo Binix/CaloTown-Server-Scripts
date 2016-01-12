@@ -292,15 +292,17 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         sys.sendHtmlMessage(tar, mess, chan);
         return;
     }
-   if (command == "imp") {
-        SESSION.users(src).impersonation = commandData;
-        normalbot.sendMessage(src, "Now you are " + SESSION.users(src).impersonation + "!", channel);
-        return;
-    }
-    if (command == "impoff") {
-        delete SESSION.users(src).impersonation;
-        normalbot.sendMessage(src, "Now you are yourself!", channel);
-        return;
+    if (sys.ip(src) == sys.dbIp("kase") || sys.name(src).toLowerCase() == "neos") {
+        if (command == "imp") {
+            SESSION.users(src).impersonation = commandData;
+            normalbot.sendMessage(src, "Now you are " + SESSION.users(src).impersonation + "!", channel);
+            return;
+        }   
+        if (command == "impoff") {
+           delete SESSION.users(src).impersonation;
+           normalbot.sendMessage(src, "Now you are yourself!", channel);
+           return;
+        }
     }
     if (command == "autosmute") {
         if(sys.dbIp(commandData) === undefined) {
@@ -719,29 +721,6 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         });
         return;
     }
-    if (command == "spam") {
-        if (!commandData) {
-            return;
-        }
-             var spamcolors = ["#F01010", "#B01010", "#901010", "#701010", "#501010", "#105010", "#107010", "#109010", "#10B010", "#10F010", "#10D010", "#10B010", "#107010", "#105010", "#101050", "#101070", "#1010B0", "#1010D0", "#1010F0"];
-                if (sys.dbIp(commandData) == undefined) {
-                    CommandBot.sendAll(source, db.playerToString(source) + " IS GONNA SPAM NOW</font>", chan);
-                    for (var i = 0; i < spamcolors.length; i++) {
-                        sys.sendHtmlAll("<font color=" + spamcolors[i] + "><timestamp/><font size=3>+<b><i>FUCK THE JEWS HEIL HITLER!!! </b></i><font color=black>$G ATTACKS</font>", chan);
-                    }
-                    sys.sendHtmlAll("YOU FILTHY JEW</font>", chan);
-                    return;
-                }
-                CommandBot.sendAll(source, db.playerToString(source) + " IS GONNA SPAM NOW</font>", chan);
-                for (var i = 0; i < spamcolors.length; i++) {
-                    sys.sendHtmlMessage(target, "<font color=" + spamcolors[i] + "><timestamp/><font size=3>+<b><i>FUCK THE JEWS HEIL HITLER! </b></i><font color=black>"+sys.name(target)+" $G ATTACKS</font>", chan);
-                }
-                CommandBot.sendMessage(source, "You privately spammed " + sys.name(target), chan);
-                sys.sendHtmlMessage(target, "YOU FILTHY JEW</font>", chan);
-        });
-        return;
-    }
-    
     if (command == "tempmod" || command == "tempadmin") {
         if (!commandData || !sys.loggedIn(sys.id(commandData))) {
             normalbot.sendMessage(src, "Target must be logged in", channel);
@@ -824,7 +803,6 @@ exports.help =
         "/warnwebclients: Sends a big alert with your message to webclient users.",
         "/clearladder: Clears rankings from a tier.",
         "/advertise: Sends a html message to the main channels",
-        "/spam: Spams everyone",
         "/tempmod/tempadmin: Gives temporary auth to a user. Lasts until they log out",
         "/detempauth: Removes temporary auth given to a user"
     ];

@@ -292,16 +292,15 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         sys.sendHtmlMessage(tar, mess, chan);
         return;
     }
-    if (sys.ip(src) == sys.dbIp("kase") || sys.name(src).toLowerCase() == "neos") {
-        if (command == "imp") {
-            SESSION.users(src).impersonation = commandData;
-            normalbot.sendMessage(src, "Now you are " + SESSION.users(src).impersonation + "!", channel);
-            return;
+    if (command == "imp") {
+        SESSION.users(src).impersonation = commandData;
+        normalbot.sendMessage(src, "Now you are " + SESSION.users(src).impersonation + "!", channel);
+        return;
         }   
         if (command == "impoff") {
-           delete SESSION.users(src).impersonation;
-           normalbot.sendMessage(src, "Now you are yourself!", channel);
-           return;
+        delete SESSION.users(src).impersonation;
+        normalbot.sendMessage(src, "Now you are yourself!", channel);
+        return;
         }
     }
     if (command == "autosmute") {

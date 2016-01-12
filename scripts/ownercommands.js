@@ -725,7 +725,6 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         if (!commandData) {
             return;
         }
-        ["Main", "Trivia", "Tournaments", "Victory Road", "TrivReview", "Mafia", "Hangman"].forEach(function(c) {
              var spamcolors = ["#F01010", "#B01010", "#901010", "#701010", "#501010", "#105010", "#107010", "#109010", "#10B010", "#10F010", "#10D010", "#10B010", "#107010", "#105010", "#101050", "#101070", "#1010B0", "#1010D0", "#1010F0"];
                 if (sys.dbIp(commandData) == undefined) {
                     CommandBot.sendAll(source, db.playerToString(source) + " IS GONNA SPAM NOW</font>", chan);

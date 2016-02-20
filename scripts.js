@@ -28,7 +28,7 @@ var Config = {
         norepeat: 5,
         stats_file: "scriptdata/mafia_stats.json",
         max_name_length: 16,
-        notPlayingMsg: "±Game: The game is in progress. Please type /join to join the next mafia game."
+        notPlayingMsg: "Â±Game: The game is in progress. Please type /join to join the next mafia game."
     },
     DreamWorldTiers: ["No Preview OU", "No Preview Ubers", "DW LC", "DW UU", "DW LU", "Gen 5 1v1 Ubers", "Gen 5 1v1", "Challenge Cup", "CC 1v1", "DW Uber Triples", "No Preview OU Triples", "No Preview Uber Doubles", "No Preview OU Doubles", "Shanai Cup", "Shanai Cup 1.5", "Shanai Cup STAT", "Original Shanai Cup TEST", "Monocolour", "Clear Skies DW"],
     superAdmins: ["Binix"],
@@ -335,10 +335,10 @@ step: function() {
     if (date.getUTCMinutes() === 10 && date.getUTCSeconds() === 0 && sys.os() !== "windows") {
         sys.get_output("nc -z server.pokemon-online.eu 10508", function callback(exit_code) {
             if (exit_code !== 0) {
-                sys.sendAll("±NetCat: Cannot reach Webclient Proxy - it may be down.", sys.channelId("Indigo Plateau"));
+                sys.sendAll("Â±NetCat: Cannot reach Webclient Proxy - it may be down.", sys.channelId("Indigo Plateau"));
             }
         }, function errback(error) {
-                sys.sendAll("±NetCat: Cannot reach Webclient Proxy - it may be down: " + error, sys.channelId("Indigo Plateau"));
+                sys.sendAll("Â±NetCat: Cannot reach Webclient Proxy - it may be down: " + error, sys.channelId("Indigo Plateau"));
         });
         clearTeamFiles();
     }
@@ -395,7 +395,7 @@ init : function() {
     blackjackchan = SESSION.global().channelManager.createPermChannel("Blackjack", "Play Blackjack here!");
 
     var dwlist = ["Timburr", "Gurdurr", "Conkeldurr", "Pansage", "Pansear", "Panpour", "Simisear", "Simisage", "Simipour", "Ekans", "Arbok", "Paras", "Parasect", "Happiny", "Chansey", "Blissey", "Munchlax", "Snorlax", "Aipom", "Ambipom", "Pineco", "Forretress", "Wurmple", "Silcoon", "Cascoon", "Beautifly", "Dustox", "Seedot", "Nuzleaf", "Shiftry", "Slakoth", "Vigoroth", "Slaking", "Nincada", "Ninjask", "Plusle", "Minun", "Budew", "Roselia", "Gulpin", "Swalot", "Kecleon", "Kricketot", "Kricketune", "Cherubi", "Cherrim", "Carnivine", "Audino", "Throh", "Sawk", "Scraggy", "Scrafty", "Rattata", "Raticate", "Nidoran-F", "Nidorina", "Nidoqueen", "Nidoran-M", "Nidorino", "Nidoking", "Oddish", "Gloom", "Vileplume", "Bellossom", "Bellsprout", "Weepinbell", "Victreebel", "Ponyta", "Rapidash", "Farfetch'd", "Doduo", "Dodrio", "Exeggcute", "Exeggutor", "Lickitung", "Lickilicky", "Tangela", "Tangrowth", "Kangaskhan", "Sentret", "Furret", "Cleffa", "Clefairy", "Clefable", "Igglybuff", "Jigglypuff", "Wigglytuff", "Mareep", "Flaaffy", "Ampharos", "Hoppip", "Skiploom", "Jumpluff", "Sunkern", "Sunflora", "Stantler", "Poochyena", "Mightyena", "Lotad", "Ludicolo", "Lombre", "Taillow", "Swellow", "Surskit", "Masquerain", "Bidoof", "Bibarel", "Shinx", "Luxio", "Luxray", "Psyduck", "Golduck", "Growlithe", "Arcanine", "Scyther", "Scizor", "Tauros", "Azurill", "Marill", "Azumarill", "Bonsly", "Sudowoodo", "Girafarig", "Miltank", "Zigzagoon", "Linoone", "Electrike", "Manectric", "Castform", "Pachirisu", "Buneary", "Lopunny", "Glameow", "Purugly", "Natu", "Xatu", "Skitty", "Delcatty", "Eevee", "Vaporeon", "Jolteon", "Flareon", "Espeon", "Umbreon", "Leafeon", "Glaceon", "Bulbasaur", "Charmander", "Squirtle", "Ivysaur", "Venusaur", "Charmeleon", "Charizard", "Wartortle", "Blastoise", "Croagunk", "Toxicroak", "Turtwig", "Grotle", "Torterra", "Chimchar", "Infernape", "Monferno", "Piplup", "Prinplup", "Empoleon", "Treecko", "Sceptile", "Grovyle", "Torchic", "Combusken", "Blaziken", "Mudkip", "Marshtomp", "Swampert", "Caterpie", "Metapod", "Butterfree", "Pidgey", "Pidgeotto", "Pidgeot", "Spearow", "Fearow", "Zubat", "Golbat", "Crobat", "Aerodactyl", "Hoothoot", "Noctowl", "Ledyba", "Ledian", "Yanma", "Yanmega", "Murkrow", "Honchkrow", "Delibird", "Wingull", "Pelipper", "Swablu", "Altaria", "Starly", "Staravia", "Staraptor", "Gligar", "Gliscor", "Drifloon", "Drifblim", "Skarmory", "Tropius", "Chatot", "Slowpoke", "Slowbro", "Slowking", "Krabby", "Kingler", "Horsea", "Seadra", "Kingdra", "Goldeen", "Seaking", "Magikarp", "Gyarados", "Omanyte", "Omastar", "Kabuto", "Kabutops", "Wooper", "Quagsire", "Qwilfish", "Corsola", "Remoraid", "Octillery", "Mantine", "Mantyke", "Carvanha", "Sharpedo", "Wailmer", "Wailord", "Barboach", "Whiscash", "Clamperl", "Gorebyss", "Huntail", "Relicanth", "Luvdisc", "Buizel", "Floatzel", "Finneon", "Lumineon", "Tentacool", "Tentacruel", "Corphish", "Crawdaunt", "Lileep", "Cradily", "Anorith", "Armaldo", "Feebas", "Milotic", "Shellos", "Gastrodon", "Lapras", "Dratini", "Dragonair", "Dragonite", "Elekid", "Electabuzz", "Electivire", "Poliwag", "Poliwrath", "Politoed", "Poliwhirl", "Vulpix", "Ninetales", "Musharna", "Munna", "Darmanitan", "Darumaka", "Mamoswine", "Togekiss", "Burmy", "Burmy-S", "Burmy-G", "Wormadam", "Wormadam-S", "Wormadam-G", "Mothim", "Pichu", "Pikachu", "Raichu","Abra","Kadabra","Alakazam","Spiritomb","Mr. Mime","Mime Jr.","Meditite","Medicham","Meowth","Persian","Shuppet","Banette","Spinarak","Ariados","Drowzee","Hypno","Wobbuffet","Wynaut","Snubbull","Granbull","Houndour","Houndoom","Smoochum","Jynx","Ralts", "Kirlia", "Gardevoir","Gallade","Sableye","Mawile","Volbeat","Illumise","Spoink","Grumpig","Stunky","Skuntank","Bronzong","Bronzor","Mankey","Primeape","Machop","Machoke","Machamp","Magnemite","Magneton","Magnezone","Koffing","Weezing","Rhyhorn","Rhydon","Rhyperior","Teddiursa","Ursaring","Slugma","Magcargo","Phanpy","Donphan","Magby","Magmar","Magmortar","Larvitar","Pupitar","Tyranitar","Makuhita","Hariyama","Numel","Camerupt","Torkoal","Spinda","Trapinch","Vibrava","Flygon","Cacnea","Cacturne","Absol","Beldum","Metang","Metagross","Hippopotas","Hippowdon","Skorupi","Drapion","Tyrogue","Hitmonlee","Hitmonchan","Hitmontop","Bagon","Shelgon","Salamence","Seel","Dewgong","Shellder","Cloyster","Chinchou","Lanturn","Smeargle","Porygon","Porygon2","Porygon-Z","Drilbur", "Excadrill", "Basculin", "Basculin-a", "Alomomola", "Stunfisk", "Druddigon", "Foongus", "Amoonguss", "Liepard", "Purrloin", "Minccino", "Cinccino", "Sandshrew", "Sandslash", "Vullaby", "Mandibuzz", "Braviary", "Frillish", "Jellicent", "Weedle", "Kakuna", "Beedrill", "Shroomish", "Breloom", "Zangoose", "Seviper", "Combee", "Vespiquen", "Patrat", "Watchog", "Blitzle", "Zebstrika", "Woobat", "Swoobat", "Mienfoo", "Mienshao", "Bouffalant", "Staryu", "Starmie", "Togepi", "Shuckle", "Togetic", "Rotom", "Sigilyph", "Riolu", "Lucario", "Lugia", "Ho-Oh", "Dialga", "Palkia", "Giratina", "Grimer", "Muk", "Ditto", "Venonat", "Venomoth", "Herdier", "Lillipup", "Stoutland", "Sewaddle", "Swadloon", "Leavanny", "Cubchoo", "Beartic", "Landorus", "Thundurus", "Tornadus","Dunsparce", "Sneasel", "Weavile", "Nosepass", "Probopass", "Karrablast", "Escavalier", "Shelmet", "Accelgor", "Snorunt", "Glalie", "Froslass", "Pinsir", "Emolga", "Heracross", "Trubbish", "Garbodor", "Snover", "Abomasnow","Diglett", "Dugtrio", "Geodude", "Graveler", "Golem", "Onix", "Steelix", "Voltorb", "Electrode", "Cubone", "Marowak", "Whismur", "Loudred", "Exploud", "Aron", "Lairon", "Aggron", "Spheal", "Sealeo", "Walrein", "Cranidos", "Rampardos", "Shieldon", "Bastiodon", "Gible", "Gabite", "Garchomp", "Pidove", "Tranquill", "Unfezant", "Tympole", "Palpitoad", "Seismitoad", "Cottonee", "Whimsicott", "Petilil", "Lilligant", "Ducklett", "Swanna", "Deerling", "Sawsbuck", "Elgyem", "Beheeyem", "Pawniard", "Bisharp", "Heatmor", "Durant","Venipede","Whirlipede", "Scolipede", "Tirtouga", "Carracosta", "Joltik", "Galvantula", "Maractus", "Dwebble", "Crustle", "Roggenrola", "Boldore", "Gigalith", "Vanillite", "Vanillish", "Vanilluxe", "Klink", "Klang", "Klinklang", "Swinub", "Piloswine", "Golett", "Golurk", "Gothitelle", "Gothorita", "Solosis", "Duosion", "Reuniclus", "Deerling-Summer", "Deerling-Autumn", "Deerling-Winter", "Sawsbuck-Summer", "Sawsbuck-Autumn", "Sawsbuck-Winter", "Roserade", "Mewtwo"];
-    var halist = dwlist.concat(["Gothita", "Rufflet", "Klefki", "Phantump", "Trevenant", "Axew", "Fraxure", "Haxorus", "Carbink", "Scatterbug", "Spewpa", "Vivillon", "Sandile", "Krokorok", "Krookodile", "Inkay", "Malamar", "Noibat", "Noivern", "Goomy", "Sliggoo", "Goodra", "Dedenne", "Helioptile", "Heliolisk", "Spritzee", "Aromatisse", "Swirlix", "Slurpuff", "Flabébé", "Floette", "Florges", "Pancham", "Pangoro", "Larvesta", "Volcarona", "Litleo", "Pyroar", "Fennekin", "Braixen", "Delphox", "Fletchling", "Fletchinder", "Talonflame", "Hawlucha", "Litwick", "Lampent", "Chandelure", "Pumpkaboo", "Pumpkaboo-S", "Pumpkaboo-L", "Pumpkaboo-XL", "Gourgeist", "Gourgeist-S", "Gourgeist-L", "Gourgeist-XL", "Duskull", "Dusclops", "Dusknoir", "Chespin", "Quilladin", "Chesnaught", "Skiddo", "Gogoat", "Bunnelby", "Diggersby", "Bergmite", "Avalugg", "Espurr", "Meowstic", "Meowstic-F", "Binacle", "Barbaracle", "Froakie", "Frogadier", "Greninja", "Sylveon"]);
+    var halist = dwlist.concat(["Gothita", "Rufflet", "Klefki", "Phantump", "Trevenant", "Axew", "Fraxure", "Haxorus", "Carbink", "Scatterbug", "Spewpa", "Vivillon", "Sandile", "Krokorok", "Krookodile", "Inkay", "Malamar", "Noibat", "Noivern", "Goomy", "Sliggoo", "Goodra", "Dedenne", "Helioptile", "Heliolisk", "Spritzee", "Aromatisse", "Swirlix", "Slurpuff", "FlabÃ©bÃ©", "Floette", "Florges", "Pancham", "Pangoro", "Larvesta", "Volcarona", "Litleo", "Pyroar", "Fennekin", "Braixen", "Delphox", "Fletchling", "Fletchinder", "Talonflame", "Hawlucha", "Litwick", "Lampent", "Chandelure", "Pumpkaboo", "Pumpkaboo-S", "Pumpkaboo-L", "Pumpkaboo-XL", "Gourgeist", "Gourgeist-S", "Gourgeist-L", "Gourgeist-XL", "Duskull", "Dusclops", "Dusknoir", "Chespin", "Quilladin", "Chesnaught", "Skiddo", "Gogoat", "Bunnelby", "Diggersby", "Bergmite", "Avalugg", "Espurr", "Meowstic", "Meowstic-F", "Binacle", "Barbaracle", "Froakie", "Frogadier", "Greninja", "Sylveon"]);
     //two lists for gen 5 and gen 6
     /* use hash for faster lookup */
     dwpokemons = {};
@@ -1119,7 +1119,7 @@ beforePlayerKick:function(src, dest){
 
 afterNewMessage : function (message) {
     if (message == "Script Check: OK") {
-        sys.sendAll("±ScriptCheck: Scripts were updated!", sys.channelId("Indigo Plateau"));
+        sys.sendAll("Â±ScriptCheck: Scripts were updated!", sys.channelId("Indigo Plateau"));
         if (typeof(scriptChecks)=='undefined')
             scriptChecks = 0;
         scriptChecks += 1;
@@ -1269,7 +1269,7 @@ nameWarnTest : function(src) {
     for (var i = 0; i < nameWarns.length; ++i) {
         var regexp = nameWarns[i];
         if (regexp.test(lname)) {
-            sys.sendAll('Namewarning: Name `' + sys.name(src) + '´ matches the following regexp: `' + regexp + '´ on the IP `' + sys.ip(src) + "´.", watchchannel);
+            sys.sendAll('Namewarning: Name `' + sys.name(src) + 'Â´ matches the following regexp: `' + regexp + 'Â´ on the IP `' + sys.ip(src) + "Â´.", watchchannel);
         }
     }
 },
@@ -1320,7 +1320,7 @@ afterLogIn : function(src) {
     if (script.cookieBanned(src)) { //prevents errors from "no id" from the rest of the function
         return;
     }
-    sys.sendMessage(src, "☯ForumBot: Join the CaloTown forums here: http://calotown.us/");
+    sys.sendMessage(src, "â˜¯ForumBot: Join the CaloTown forums here: http://calotown.us/");
     commandbot.sendMessage(src, "Type in /commands to view the command lists!");
 
     if (sys.numPlayers() > maxPlayersOnline) {
@@ -1336,7 +1336,7 @@ afterLogIn : function(src) {
     countbot.sendMessage(src, "CaloTown has been online for "+this.startUpTime());
     sys.sendMessage(src, "");
     sys.sendHtmlMessage(src, "<b><i>+Message of the Day: Welcome to <font color = #660066>Calotown!</font> We hope you enjoy your stay, oh and remember to read the <u>/rules!</u> Not reading them doesn't exclude you from your punishment.</b></i>");
-
+		sys.sendHtmlAll("<timestamp/><font color = " + sys.getColor(src) + "><b>" + sys.name(src) + "</b></font> has logged in!");
     callplugins("afterLogIn", src);
 
 //   if (SESSION.users(src).android) {
@@ -1368,6 +1368,7 @@ afterLogIn : function(src) {
     if (isAndroid(src)) {
         normalbot.sendMessage(src, "New android version with included teambuilder! See: http://pokemon-online.eu/forums/showthread.php?22137-Android-App-with-Teambuilder");
     }
+
 }, /* end of afterLogin */
 
 beforePlayerRegister : function(src) {
@@ -1394,6 +1395,7 @@ beforeLogOut : function(src) {
 },
 
 afterLogOut : function(src) {
+		sys.sendHtmlAll("<timestamp/><font color = " + sys.getColor(src) + "><b>" + sys.name(src) + "</b></font> has logged out!");
 },
 
 
@@ -1709,7 +1711,7 @@ beforeChatMessage: function(src, message, chan) {
                 }
             }
         }
-        var BanList = [".tk", "nimp.org", "drogendealer", /\u0E49/, /\u00AD/, "nobrain.dk", /\bn[1i]gg+ers*\b/i,  "¦¦", "¦¦", "__", "¯¯", "___", "", ".....", "¶¶", "¯¯", "----", "+-+"];
+        var BanList = [".tk", "nimp.org", "drogendealer", /\u0E49/, /\u00AD/, "nobrain.dk", /\bn[1i]gg+ers*\b/i,  "Â¦Â¦", "Â¦Â¦", "__", "Â¯Â¯", "___", "Â…Â…", ".....", "Â¶Â¶", "Â¯Â¯", "----", "+-+"];
         for (var i = 0; i < BanList.length; ++i) {
             var filter = BanList[i];
             if (typeof filter == "string" && m.indexOf(filter) != -1 || typeof filter == "function" && filter.test(m)) {

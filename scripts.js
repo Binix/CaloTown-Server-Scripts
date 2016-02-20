@@ -22,7 +22,7 @@ var Config = {
     rpgbot: "XatuBot",
     bfbot: "GoomyBot",
     // suspectvoting.js available, but not in use
-    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "bot.js", "safari.js"],
+    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "bot.js"],
     Mafia: {
         bot: "Evor",
         norepeat: 5,

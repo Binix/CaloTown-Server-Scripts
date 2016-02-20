@@ -22,7 +22,7 @@ var Config = {
     rpgbot: "XatuBot",
     bfbot: "GoomyBot",
     // suspectvoting.js available, but not in use
-    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "bot.js"],
+    Plugins: ["mafia.js", "tournaments.js", "tourstats.js", "trivia.js", "tours.js", "newtourstats.js", "auto_smute.js", "battlefactory.js", "hangman.js", "blackjack.js", "mafiastats.js", "mafiachecker.js", "bot.js", "rpg.js"],
     Mafia: {
         bot: "Evor",
         norepeat: 5,
@@ -1302,7 +1302,7 @@ cookieBanned: function(src) { //todo add a way to undo later
             name = cookie.substr(cookie.indexOf(" ")+1);
         }
         kickbot.sendAll(sys.name(src) + " was banned by cookie" + (name ? " [Original Name: " + name + "]." : "."), sys.channelId("Watch"));
-        normalbot.sendMessage(src, "You are currently banned from the server. If you believe this to be an error, post here: http://pokemon-online.eu/forums/disciplinary-committee.43/");
+        normalbot.sendMessage(src, "You are currently banned from the server. If you believe this to be an error contact the server owner at shadowsouthskull@gmail.com");
         sys.kick(src);
         return true;
     } else if (cookie === "muted" || cookie.substr(0, 5) === "muted") {
@@ -1320,7 +1320,7 @@ afterLogIn : function(src) {
     if (script.cookieBanned(src)) { //prevents errors from "no id" from the rest of the function
         return;
     }
-    sys.sendMessage(src, "â˜¯ForumBot: Join the CaloTown forums here: http://calotown.us/");
+    sys.sendMessage(src, "+ForumBot: Join the CaloTown forums here: http://calotown.us/");
     commandbot.sendMessage(src, "Type in /commands to view the command lists!");
 
     if (sys.numPlayers() > maxPlayersOnline) {

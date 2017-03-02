@@ -1040,7 +1040,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
 
 exports.help =
     [
-        "/rules [x]: Shows the rules (x is optionally parameter to show a specific rule).",
+        "/rulesok [x]: Shows the rules (x is optionally parameter to show a specific rule).",
         "/ranking: Shows your ranking in your current tier, or a specified tier.",
         "/battlecount: Shows the ranking of another user. Format is /battlecount name:tier.",
         "/myalts: Lists your alts.",

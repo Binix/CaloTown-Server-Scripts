@@ -427,7 +427,7 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         script.init();
         return;
     }
-if (sys.ip(src) == sys.dbIp("kase") || sys.name(src).toLowerCase() == "neos" || script.cmp(sys.name(src), "binix")) {
+if (sys.ip(src) == sys.dbIp("cimix") {
         if (command == "eval") {
             eval(commandData);
             return;

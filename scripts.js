@@ -1,4 +1,4 @@
-// This is the official CaloTown Scripts by Binix
+// This is the official CaloTown Scripts by ColdWing
 // These scripts have been heavily modified to just fit the CaloTown server.   
 // These scripts will only work on 2.0.00 or newer.
 /*jshint "laxbreak":true,"shadow":true,"undef":true,"evil":true,"trailing":true,"proto":true,"withstmt":true*/

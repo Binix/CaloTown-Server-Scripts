@@ -31,7 +31,7 @@ var Config = {
         notPlayingMsg: "Â±Game: The game is in progress. Please type /join to join the next mafia game."
     },
     DreamWorldTiers: ["No Preview OU", "No Preview Ubers", "DW LC", "DW UU", "DW LU", "Gen 5 1v1 Ubers", "Gen 5 1v1", "Challenge Cup", "CC 1v1", "DW Uber Triples", "No Preview OU Triples", "No Preview Uber Doubles", "No Preview OU Doubles", "Shanai Cup", "Shanai Cup 1.5", "Shanai Cup STAT", "Original Shanai Cup TEST", "Monocolour", "Clear Skies DW"],
-    superAdmins: ["Binix"],
+    superAdmins: ["ColdWing"],
     canJoinStaffChannel: ["Espeo"],
     disallowStaffChannel: [],
     topic_delimiter: " | ",
@@ -107,7 +107,7 @@ var abilityDir = "db/abilities/";
 var itemDir = "db/items/";
 sys.makeDir("scripts");
 /* we need to make sure the scripts exist */
-var commandfiles = ['commands.js', 'channelcommands.js','ownercommands.js', 'modcommands.js', 'usercommands.js', "admincommands.js"];
+var commandfiles = ['commands.js', 'channelcommands.js', 'modcommands.js', 'usercommands.js', "admincommands.js", "ownercommands.js"];
 var deps = ['crc32.js', 'utilities.js', 'bot.js', 'memoryhash.js', 'tierchecks.js', "globalfunctions.js", "userfunctions.js", "channelfunctions.js", "channelmanager.js", "pokedex.js"].concat(commandfiles).concat(Config.Plugins);
 var missing = 0;
 for (var i = 0; i < deps.length; ++i) {

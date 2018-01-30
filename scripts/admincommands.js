@@ -256,6 +256,189 @@ exports.handleCommand = function(src, command, commandData, tar, channel) {
         normalbot.sendAll(commandData.toCorrectCase() + " was cookie " + type, staffchannel);
         return;
     }
+     if (command == "updatecommands") {
+        var commandFiles = ["usercommands.js", "modcommands.js", "admincommands.js", "ownercommands.js", "channelcommands.js", "commands.js"];
+        commandFiles.forEach(function(file) {
+            var module = updateModule(file);
+            module.source = file;
+            delete require.cache[file];
+            if (file === "commands.js") {
+                commands = require('commands.js');
+            }
+        });
+        normalbot.sendAll("Updated commands!", staffchannel);
+        return;
+    }
+    if (command == "updatechannels") {
+        var commandFiles = ["channelfunctions.js", "channelmanager.js"];
+        commandFiles.forEach(function(file) {
+            var module = updateModule(file);
+            module.source = file;
+            delete require.cache[file];
+            if (file === "channelfunctions.js") { 
+                POChannel = require(file).POChannel;
+            }
+            if (file === "channelmanager.js") { 
+                POChannelManager = require(file).POChannelManager;
+            }
+        });
+        normalbot.sendAll("Updated channel functions!", staffchannel);
+        return;
+    }
+    if (command == "updateusers") {
+        var file = "userfunctions.js";
+        var module = updateModule(file);
+        module.source = file;
+        delete require.cache[file];
+        POUser = require(file).POUser;
+        normalbot.sendAll("Updated user functions!", staffchannel);
+        return;
+    }
+    if (command == "updateglobal") {
+        var file = "globalfunctions.js";
+        var module = updateModule(file);
+        module.source = file;
+        delete require.cache[file];
+        POGlobal = require(file).POGlobal;
+        normalbot.sendAll("Updated global functions!", staffchannel);
+        return;
+    }
+    if (command === "updatefile") {
+        var files = ["crc32.js", "utilities.js", "bot.js", "memoryhash.js", "pokedex.js"];
+        if (commandData === "" || files.indexOf(commandData.toLowerCase()) === -1) {
+            normalbot.sendMessage(src, "File '" + commandData + "' not found.", channel);
+            return;
+        }
+        var fileName = files[files.indexOf(commandData.toLowerCase())];
+        var module = updateModule(fileName);
+        module.source = fileName;
+        delete require.cache[fileName];
+        switch (fileName) {
+            case "crc32.js":
+                crc32 = require(fileName).crc32;
+                break;
+            case "utilities.js":
+                utilities = require(fileName);
+                break;
+            case "bot.js":
+                Bot = require(fileName).Bot;
+                break;
+            case "memoryhash.js":
+                MemoryHash = require(fileName).MemoryHash;
+                break;
+            case "pokedex.js":
+                pokedex = require(fileName);
+                break;
+        }
+        normalbot.sendAll("File " + fileName + " was updated!", staffchannel);
+        return;
+    }
+    if (command == "updatescripts") {
+        normalbot.sendMessage(src, "Fetching scripts...", channel);
+        var updateURL = Config.base_url + "scripts.js";
+        if (commandData !== undefined && (commandData.substring(0,7) == 'http://' || commandData.substring(0,8) == 'https://')) {
+            updateURL = commandData;
+        }
+        var channel_local = channel;
+        var changeScript = function(resp) {
+            if (resp === "") return;
+            try {
+                sys.changeScript(resp);
+                sys.writeToFile('scripts.js', resp);
+            } catch (err) {
+                sys.changeScript(sys.getFileContent('scripts.js'));
+                normalbot.sendAll(err + (err.lineNumber ? " on line: " + err.lineNumber : "") + ". Using old scripts instead!", staffchannel);
+                print(err);
+            }
+        };
+        normalbot.sendMessage(src, "Fetching scripts from " + updateURL, channel);
+        sys.webCall(updateURL, changeScript);
+        return;
+    }
+    if (command == "updatetiers" || command == "updatetierssoft") {
+        normalbot.sendMessage(src, "Fetching tiers...", channel);
+        var updateURL = Config.base_url + "tiers.xml";
+        if (commandData !== undefined && (commandData.substring(0,7) == 'http://' || commandData.substring(0,8) == 'https://')) {
+            updateURL = commandData;
+        }
+        normalbot.sendMessage(src, "Fetching tiers from " + updateURL, channel);
+        var updateTiers = function(resp) {
+            if (resp === "") return;
+            try {
+                sys.writeToFile("tiers.xml", resp);
+                if (command == "updatetiers") {
+                    sys.reloadTiers();
+                } else {
+                    normalbot.sendMessage(src, "Tiers.xml updated!", channel);
+                }
+            } catch (e) {
+                normalbot.sendAll(e + (e.lineNumber ? " on line: " + e.lineNumber : ""), staffchannel);
+                return;
+            }
+        };
+        sys.webCall(updateURL, updateTiers);
+        return;
+    }
+    if (command == "updategenmoves") {
+        sys.webCall(Config.base_url + Config.dataDir + 'all_gen_moves.txt', function (resp) {
+            sys.writeToFile(Config.dataDir + "all_gen_moves.txt", resp);
+            allGenMovesList = false;
+            normalbot.sendAll("Updated pokebank moves!", staffchannel);
+        });
+        return;
+    }
+    if (command == "addplugin") {
+        var POglobal = SESSION.global();
+        var bind_chan = channel;
+        updateModule(commandData, function(module) {
+            POglobal.plugins.push(module);
+            module.source = commandData;
+            try {
+                module.init();
+                sys.sendMessage(src, "±Plugins: Module " + commandData + " updated!", bind_chan);
+            } catch(e) {
+                sys.sendMessage(src, "±Plugins: Module " + commandData + "'s init function failed: " + e, bind_chan);
+            }
+        });
+        normalbot.sendMessage(src, "Downloading module " + commandData + "!", channel);
+        return;
+    }
+    if (command == "removeplugin") {
+        var POglobal = SESSION.global();
+        for (var i = 0; i < POglobal.plugins.length; ++i) {
+            if (commandData == POglobal.plugins[i].source) {
+                normalbot.sendMessage(src, "Module " + POglobal.plugins[i].source + " removed!", channel);
+                POglobal.plugins.splice(i,1);
+                return;
+            }
+        }
+        normalbot.sendMessage(src, "Module not found, can not remove.", channel);
+        return;
+    }
+    if (command == "updateplugin") {
+        var POglobal = SESSION.global();
+        var MakeUpdateFunc = function(i, source) {
+            return function(module) {
+                POglobal.plugins[i] = module;
+                module.source = source;
+                module.init();
+                normalbot.sendAll("Module " + source + " updated!", staffchannel);
+            };
+        };
+        for (var i = 0; i < POglobal.plugins.length; ++i) {
+            if (commandData == POglobal.plugins[i].source) {
+                if (commandData === "battlefactory.js") {
+                    require("battlefactory.js").saveSets();
+                }
+                var source = POglobal.plugins[i].source;
+                updateModule(source, MakeUpdateFunc(i, source));
+                normalbot.sendMessage(src, "Downloading module " + source + "!", channel);
+                return;
+            }
+        }
+        normalbot.sendMessage(src, "Module not found, can not update.", channel);
+        return;
+    }
     if (command == "cookieunban" || command ==  "cookieunmute") {
         if (!commandData) {
             return;
